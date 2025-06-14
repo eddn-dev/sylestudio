@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import { imagetools } from 'vite-imagetools';
 
 export default defineConfig({
   plugins: [
@@ -10,6 +11,7 @@ export default defineConfig({
       ],
       refresh: true,
     }),
+    imagetools(),
   ],
   resolve: {
     alias: { '@': '/resources/js' },

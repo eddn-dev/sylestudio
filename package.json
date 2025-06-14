@@ -16,8 +16,10 @@
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.2.0",
         "postcss": "^8.5.5",
+        "sharp": "^0.34.2",
         "tailwindcss": "^4.1.10",
-        "vite": "^6.2.4"
+        "vite": "^6.2.4",
+        "vite-imagetools": "^7.1.0"
     },
     "dependencies": {
         "gsap": "^3.13.0"

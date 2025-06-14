@@ -3,3 +3,105 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@theme{
+    --color-primary:            #000;
+    --color-on-primary:         #fff;
+    --color-surface:            #fff;
+    --color-on-surface:         #000;
+    --color-surface-variant:    #f4f4f5;
+    --color-outline:            #080809;
+    --color-outline-variant:    #323030;
+    --color-inverseSurface:     #000;
+    --color-inverseOnSurface:   #fff;
+}
+
+#preview-colors{
+    --color-primary: #000;
+    --color-on-primary: #fff;
+    --color-surface: #fff;
+    --color-on-surface: #000;
+    --color-surface-variant: #f4f4f5;
+    --color-outline: #080809;
+    --color-outline-variant: #323030;
+    --color-inverseSurface: #000;
+    --color-inverseOnSurface: #fff;
+}
+
+/*  Estado normal vs. scrolled (prefijo específico para evitar colisiones) */
+#mainNav            { @apply bg-transparent text-on-primary; }
+#mainNav.nav--scrolled {
+  @apply bg-white text-on-surface shadow-sm border-b border-outline;
+  will-change: transform;
+  transform: translateZ(0); /* mejora suavidad en móviles */
+}
+
+/* resources/css/app.css */
+.logo--white,
+.logo--black {
+  @apply transition-opacity duration-300;
+}
+
+.logo--black { @apply opacity-0; }
+.nav--scrolled .logo--white { @apply opacity-0; }
+.nav--scrolled .logo--black { @apply opacity-100; }
+
+.category-card   { @apply bg-black text-white; }       /* texto blanco encima */
+.card-label      { @apply absolute top-4 left-4 md:left-6; }
+
+@layer components {
+  /* ---------- botón base ---------- */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 font-semibold uppercase tracking-wider
+           bg-black text-white border border-outline
+           transition-colors duration-300 relative overflow-hidden;
+    will-change: background-color, border-color;
+    cursor: pointer;
+  }
+
+  /* ---------- destello ---------- */
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-y-0 -left-[150%] w-1/2;
+    background: linear-gradient(120deg,
+                transparent 0%,
+                rgba(255,255,255,.35) 50%,
+                transparent 100%);
+    transform: skewX(-25deg);
+    opacity: 0;
+  }
+
+  /* ---------- interacción ---------- */
+  .btn-primary:hover {
+    @apply bg-outline-variant border-outline-variant;           /* gris final */
+  }
+
+  .btn-primary:hover::after {
+    animation: shine .4s forwards;
+  }
+
+  .btn-primary:focus-visible {
+    @apply ring-2 ring-offset-2 ring-outline-variant;
+  }
+}
+
+/* ---------- keyframes ---------- */
+@keyframes shine {
+  0%   { left:-150%; opacity:0; }
+  100% { left:150%;  opacity:1; }
+}
+
+@layer components {
+  /* Linea under-style común para inputs */
+  input[type="text"], input[type="email"], input[type="password"] {
+    @apply bg-transparent border-b border-outline focus:ring-0 focus:border-on-surface
+           placeholder:text-on-surface/60 transition-colors duration-300;
+  }
+
+  .dark input[type="text"], .dark input[type="email"], .dark input[type="password"],
+  .bg-gray-900 input[type="email"] {          /* onblack = bool */
+    @apply border-outline-variant text-on-primary placeholder:text-on-primary/60
+           focus:border-on-primary;
+  }
+}
