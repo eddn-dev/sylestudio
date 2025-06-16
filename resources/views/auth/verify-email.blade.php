@@ -1,31 +1,31 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
+@extends('layouts.app')
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
+@section('content')
+    <div class="w-full max-w-sm mx-auto py-20 space-y-8">
+        <x-form-title>VERIFICA TU EMAIL</x-form-title>
+        <x-form-description>
+            Te hemos enviado un enlace de verificación a tu correo.  
+            Si no lo recibiste, pulsa el botón para reenviarlo.
+        </x-form-description>
 
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
+        @if (session('status') === 'verification-link-sent')
+            <p class="text-center text-sm text-green-600">
+                Se envió un nuevo enlace a tu correo.
+            </p>
+        @endif
+
+        <form method="POST" action="{{ route('verification.send') }}" class="space-y-6">
             @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
+            <x-primary-button class="w-full">
+                REENVIAR ENLACE
+            </x-primary-button>
         </form>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
-            </button>
-        </form>
+        <p class="text-center text-sm text-on-surface/80">
+            <x-form-helper-link href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); this.closest('form').submit();">
+                Cerrar sesión
+            </x-form-helper-link>
+        </p>
     </div>
-</x-guest-layout>
+@endsection

@@ -33,6 +33,21 @@ Route::middleware('auth')->group(function () {
 });
 
 /*
+│ ─────────────── STUB PAGES (para hoy) ───────────────
+│ El navbar ya apunta a estas rutas sin lanzar 404.
+│ Crea las vistas en resources/views/pages/cart.blade.php
+│ y wishlist.blade.php con un simple “Coming soon…”.
+*/
+Route::get('/cart', function () {
+    return view('pages.cart');          // resources/views/pages/cart.blade.php
+})->name('cart');
+
+Route::middleware('auth')->get('/wishlist', function () {
+    return view('pages.wishlist');      // resources/views/pages/wishlist.blade.php
+})->name('wishlist');
+
+
+/*
 │ Breeze auth routes
 */
 require __DIR__.'/auth.php';

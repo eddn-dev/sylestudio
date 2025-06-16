@@ -1,52 +1,59 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.app')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+@section('content')
+    <div class="w-full max-w-sm mx-auto py-20 space-y-8">
+        <x-form-title>CREA TU CUENTA</x-form-title>
+        <x-form-description>
+            Completa el formulario para registrarte.
+        </x-form-description>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <form method="POST" action="{{ route('register') }}" class="space-y-6">
+            @csrf
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            {{-- Nombre --}}
+            <x-form-input  type="text"
+                           name="name"
+                           placeholder="Nombre"
+                           :value="old('name')"
+                           required
+                           autocomplete="name" />
+            <x-input-error :messages="$errors->get('name')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            {{-- Email --}}
+            <x-form-input  type="email"
+                           name="email"
+                           placeholder="Correo electrónico"
+                           :value="old('email')"
+                           required
+                           autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            {{-- Password --}}
+            <x-form-input  type="password"
+                           name="password"
+                           placeholder="Contraseña"
+                           required
+                           autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" />
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            {{-- Confirm Password --}}
+            <x-form-input  type="password"
+                           name="password_confirmation"
+                           placeholder="Confirmar contraseña"
+                           required
+                           autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password_confirmation')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
+            <x-primary-button class="w-full">
+                REGISTRAR
             </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+        </form>
+
+        <p class="text-center text-sm text-on-surface/80">
+            ¿Ya tienes cuenta?
+            <x-form-helper-link href="{{ route('login') }}" class="font-medium">
+                Inicia sesión aquí
+            </x-form-helper-link>
+        </p>
+    </div>
+@endsection

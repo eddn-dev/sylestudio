@@ -57,5 +57,4 @@
     <x-category-card slug="events"  title="EVENTS"  sub="OUR EVENTS"  src-base="resources/images/events" />
 </section>
 @include('sections.join'){{-- Espacio para scroll y ver el efecto de parallax --}}
-<div class="h-[200vh]"></div>
 @endsection

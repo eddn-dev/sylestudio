@@ -105,3 +105,24 @@
            focus:border-on-primary;
   }
 }
+
+
+@layer utilities {
+  .footer-link {
+    @apply transition-colors duration-200 hover:text-white text-on-primary/80;
+  }
+}
+
+/* resources/css/partials/_components.css  (o donde tengas tus utilidades) */
+@layer components {
+  .icon-btn {
+    @apply inline-flex items-center justify-center h-6 w-6 leading-none;
+  }
+
+  .icon-btn > svg {
+    @apply block h-full w-full;
+  }
+}
+.icon-wrapper {
+    @apply relative inline-flex items-center leading-none;
+  }

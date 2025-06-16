@@ -21,13 +21,7 @@
         <form action="{{ route('home') }}" method="POST" class="max-w-md space-y-6">
             @csrf
             <div>
-                <x-form.input
-                    name="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                    onblack="true"
-                />
+                <x-form-input name="email" type="email" placeholder="Email address" required onblack />
             </div>
 
             <x-primary-button class="w-full md:w-48">
